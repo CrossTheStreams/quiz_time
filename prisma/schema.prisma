@@ -1,0 +1,29 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model FlashCardDeck {
+  id Int @id @default(autoincrement())
+  title     String   @db.VarChar(255) @default("")
+  description String @db.VarChar(4000)
+  flashCards FlashCard[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model FlashCard {
+  id Int @id @default(autoincrement()) 
+  flashCardDeck FlashCardDeck @relation(fields: [flashCardDeckId], references: [id])
+  flashCardDeckId Int
+  hiddenUntil DateTime?
+  front String @db.VarChar(4000) @default("")
+  back String @db.VarChar(4000) @default("")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

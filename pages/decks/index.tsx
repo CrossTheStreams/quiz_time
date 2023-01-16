@@ -1,5 +1,5 @@
 import useSWR from 'swr'
-import DeckList from "../../components/DeckList"
+import DeckList from "../../components/decks/DeckList"
 
 const fetcher = (query: string) =>
   fetch('/api/graphql', {

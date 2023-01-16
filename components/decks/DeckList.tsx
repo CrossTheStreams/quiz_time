@@ -1,4 +1,6 @@
 import { FlashCardDeck } from "@prisma/client"
+import Link from 'next/link'
+import Deck from "./Deck"
 
 /*
   This example requires some changes to your config:
@@ -47,16 +49,7 @@ export default function DeckList(props: DeckListProps) {
             ) : (
               decks.map((deck) => (
                 <li key={deck.id} className="py-5">
-                  <div className="relative focus-within:ring-2 focus-within:ring-indigo-500">
-                    <h3 className="text-sm font-semibold">
-                      <a href="#" className="hover:underline focus:outline-none">
-                        {/* Extend touch target to entire panel */}
-                        <span className="absolute inset-0" aria-hidden="true" />
-                        {deck.title}
-                      </a>
-                    </h3>
-                    <p className="mt-1 text-sm line-clamp-2">{deck.description}</p>
-                  </div>
+                  <Deck deck={deck}/>
                 </li>
               ))
             )
@@ -64,12 +57,13 @@ export default function DeckList(props: DeckListProps) {
         </ul>
       </div>
       <div className="mt-6">
-        <a
-          href="#"
+        <Link
+          href={"#"}
+          onClick={() => console.log("foo")}
           className="flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
         >
           Add Deck + 
-        </a>
+        </Link>
       </div>
     </div>
   )
